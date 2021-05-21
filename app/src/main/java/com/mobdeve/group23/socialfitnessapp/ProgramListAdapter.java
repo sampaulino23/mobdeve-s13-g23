@@ -1,0 +1,58 @@
+package com.mobdeve.group23.socialfitnessapp;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> {
+
+    private ArrayList<Program> programList;
+
+    public ProgramListAdapter(ArrayList<Program> data) {
+        this.programList = data;
+    }
+
+    @NonNull
+    @Override
+    public ProgramListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Inflate layout to a view
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.program_layout, parent, false);
+
+        //Assign layout or view to OrderListHolder
+        ProgramListHolder programListHolder = new ProgramListHolder(v);
+        return programListHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ProgramListHolder holder, int position) {
+
+        //To set the information
+        holder.setProgramThumbnailIv(this.programList.get(position).getPhoto());
+        holder.setProgramNameTv(this.programList.get(position).getName());
+        holder.setProgramTypeTv(this.programList.get(position).getType());
+        holder.setProgramDateTv(this.programList.get(position).getDate());
+        holder.setProgramTimeTv(this.programList.get(position).getTime());
+
+        //start new activity
+        /*
+        holder.itemView.findViewById(R.id.orderlistViewTv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIntent(v, position);
+            }
+        });
+
+         */
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return programList.size();
+    }
+}
