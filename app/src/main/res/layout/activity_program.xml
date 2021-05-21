@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProgramActivity">
+
+    <ImageView
+        android:id="@+id/sProgramImageIv"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sProgramNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cardio Workout"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sProgramTypeTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Workout" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sProgramDateTv"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:text="May 28, 2021" />
+
+            <TextView
+                android:id="@+id/sProgramTimeTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6:00 PM" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sProgramDescriptionTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae accumsan eros. Mauris vestibulum lectus id leo gravida ultricies. Cras id quam mauris. Mauris eget sagittis diam. Vestibulum aliquam, justo ac dapibus tincidunt, augue felis rhoncus orci, ut porttitor risus nisi nec tellus. Donec bibendum mattis dui, in feugiat enim lacinia a. " />
+
+    <TextView
+        android:id="@+id/sProgramLinkLabelTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meeting Link"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sProgramLinkTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="https://zoom.us/j/5551112222" />
+</LinearLayout>

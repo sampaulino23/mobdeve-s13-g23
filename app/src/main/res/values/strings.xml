@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Social Fitness App</string>
+
+    <string-array name="Type_items">
+        <item>Workout</item>
+        <item>Nutrition</item>
+        <item>Seminar</item>
+        <item>Others</item>
+    </string-array>
 </resources>

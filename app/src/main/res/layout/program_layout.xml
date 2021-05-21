@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <ImageView
+        android:id="@+id/programThumbnailIv"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/programNameTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cardio Workout"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/programTypeTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Workout" />
+
+    <TextView
+        android:id="@+id/programDateTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="May 28, 2021" />
+
+    <TextView
+        android:id="@+id/programTimeTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="6:00 PM" />
+</LinearLayout>
