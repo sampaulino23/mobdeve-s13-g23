@@ -2,42 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/programLl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape"
-    android:orientation="vertical"
-    android:padding="6dp">
+    android:orientation="vertical">
+    <!--  android:background="@drawable/shape" -->
 
     <ImageView
-        android:id="@+id/programThumbnailIv"
+        android:id="@+id/programPhotoIv"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/programNameTv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cardio Workout"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:layout_margin="5dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/programTypeTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Workout" />
+        <TextView
+            android:id="@+id/programNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cardio Workout"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/programDateTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="May 28, 2021" />
+        <TextView
+            android:id="@+id/programTypeTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Workout"
+            android:textColor="#000000" />
 
-    <TextView
-        android:id="@+id/programTimeTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="6:00 PM" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="5dp"
+                app:srcCompat="@drawable/calendar" />
+
+            <TextView
+                android:id="@+id/programDateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:gravity="bottom"
+                android:text="May 28, 2021"
+                android:textColor="#000000"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/programTimeTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:text="6:00 PM"
+                android:textColor="#000000"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

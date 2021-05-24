@@ -7,67 +7,125 @@
     android:orientation="vertical"
     tools:context=".ProgramActivity">
 
-    <ImageView
-        android:id="@+id/sProgramImageIv"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/sProgramNameTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cardio Workout"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/sProgramTypeTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Workout" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/sProgramDateTv"
-                android:layout_width="171dp"
-                android:layout_height="wrap_content"
-                android:text="May 28, 2021" />
+            <ImageView
+                android:id="@+id/sProgramPhotoIv"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <TextView
-                android:id="@+id/sProgramTimeTv"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="6:00 PM" />
+                android:background="#DBF3FA"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/sProgramNameTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cardio Workout"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sProgramTypeTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Workout"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="5dp"
+                        app:srcCompat="@drawable/calendar" />
+
+                    <TextView
+                        android:id="@+id/sProgramDateTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="15dp"
+                        android:gravity="bottom"
+                        android:text="May 28, 2021"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/sProgramTimeTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:text="6:00 PM"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/sProgramDescriptionTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae accumsan eros. Mauris vestibulum lectus id leo gravida ultricies. Cras id quam mauris.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae accumsan eros. Mauris vestibulum lectus id leo gravida ultricies. Cras id quam mauris.  "
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/sProgramLinkLabelTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Meeting Link"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sProgramLinkTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="all"
+                    android:linksClickable="true"
+                    android:text="https://zoom.us/j/5551112222"
+                    android:textSize="16dp" />
+
+                <Button
+                    android:id="@+id/sProgramJoinBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Join Program"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/sProgramDescriptionTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae accumsan eros. Mauris vestibulum lectus id leo gravida ultricies. Cras id quam mauris. Mauris eget sagittis diam. Vestibulum aliquam, justo ac dapibus tincidunt, augue felis rhoncus orci, ut porttitor risus nisi nec tellus. Donec bibendum mattis dui, in feugiat enim lacinia a. " />
-
-    <TextView
-        android:id="@+id/sProgramLinkLabelTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Meeting Link"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/sProgramLinkTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="https://zoom.us/j/5551112222" />
 </LinearLayout>

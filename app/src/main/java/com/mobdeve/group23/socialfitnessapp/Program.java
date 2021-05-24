@@ -23,6 +23,16 @@ public class Program {
         this.photo = photo;
     }
 
+    public Program() {
+        this.name = getName();
+        this.type = getType();
+        this.description = getDescription();
+        this.date = getDate();
+        this.time = getTime();
+        this.link = getLink();
+        this.photo = getPhoto();
+    }
+
     public String getName() {
         return name;
     }
@@ -78,4 +88,5 @@ public class Program {
     public void setPhoto(int photo) {
         this.photo = photo;
     }
+
 }

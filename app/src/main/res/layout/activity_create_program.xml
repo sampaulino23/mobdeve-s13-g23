@@ -19,7 +19,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="35dp" />
 
     <TextView
         android:id="@+id/createNameTv"
@@ -35,19 +35,28 @@
         android:inputType="textPersonName"
         android:textColor="#000000" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
     <TextView
         android:id="@+id/createDescriptionTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description" />
+        android:text="Description"/>
 
     <EditText
         android:id="@+id/createDescriptionEt"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="top"
+        android:inputType="textMultiLine"
         android:textColor="#000000" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
     <TextView
         android:id="@+id/createTypeTv"
@@ -57,9 +66,13 @@
 
     <Spinner
         android:id="@+id/createTypeSp"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:entries="@array/Type_items" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +80,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="188dp"
+            android:layout_width="251dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -82,6 +95,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:inputType="date"
                 android:textColor="#000000" />
 
@@ -103,11 +118,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:inputType="time"
                 android:textColor="#000000" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
     <TextView
         android:id="@+id/createLinkTv"
@@ -122,6 +143,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="#000000" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
     <TextView
         android:id="@+id/createImageTv"
@@ -138,6 +163,7 @@
             android:id="@+id/createUploadIcon"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            app:srcCompat="@drawable/uploadimage"
             tools:srcCompat="@drawable/uploadimage" />
 
         <TextView
@@ -145,14 +171,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:gravity="center"
+            android:gravity="bottom"
             android:text="filename.jpg"
             android:textColor="#000000" />
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="35dp" />
+        android:layout_height="45dp" />
 
     <Button
         android:id="@+id/createProgramBtn"

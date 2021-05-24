@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProgramListHolder extends RecyclerView.ViewHolder{
 
 
-    private ImageView programThumbnailIv;
+    private ImageView programPhotoIv;
     private TextView programNameTv;
     private TextView programTypeTv;
     private TextView programDateTv;
@@ -21,7 +21,7 @@ public class ProgramListHolder extends RecyclerView.ViewHolder{
     public ProgramListHolder(@NonNull View itemView) {
         super(itemView);
 
-        this.programThumbnailIv = itemView.findViewById(R.id.programThumbnailIv);
+        this.programPhotoIv = itemView.findViewById(R.id.programPhotoIv);
         this.programNameTv = itemView.findViewById(R.id.programNameTv);
         this.programTypeTv = itemView.findViewById(R.id.programTypeTv);
         this.programDateTv = itemView.findViewById(R.id.programDateTv);
@@ -29,8 +29,8 @@ public class ProgramListHolder extends RecyclerView.ViewHolder{
 
     }
 
-    public void setProgramThumbnailIv(int programThumbnailIv) {
-        this.programThumbnailIv.setImageResource(programThumbnailIv);
+    public void setProgramPhotoIv(int programPhotoIv) {
+        this.programPhotoIv.setImageResource(programPhotoIv);
     }
 
     public void setProgramNameTv(String programNameTv) {
