@@ -14,12 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signupFacebookBtn;
     private TextView signupSignInTv;
 
-    private FirebaseAuth mAuth;
+//    private FirebaseAuth mAuth;
 
     boolean validDate = false;
 //    int age;
@@ -54,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.signupFacebookBtn = findViewById(R.id.signupFacebookBtn);
         this.signupSignInTv = findViewById(R.id.signupSignInTv);
 
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
 
         signupBirthdateEt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,6 +200,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        /*
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -251,7 +246,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     }
                 });
-
+*/
     }
 
 }
