@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "906392938541",
+    "project_id": "social-workout-9fb61",
+    "storage_bucket": "social-workout-9fb61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906392938541:android:5f0debf7bf7989d9b470a4",
+        "android_client_info": {
+          "package_name": "com.mobdeve.group23.socialfitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906392938541-4h8es7anr05oiu9hd98t5h987d89f7fb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACLJt_c8X0-sTbphYuDSuiTBsoFSfw2-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906392938541-4h8es7anr05oiu9hd98t5h987d89f7fb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
