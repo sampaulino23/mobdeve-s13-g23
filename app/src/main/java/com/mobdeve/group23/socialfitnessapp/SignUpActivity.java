@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signupFacebookBtn;
     private TextView signupSignInTv;
 
-//    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     boolean validDate = false;
 //    int age;
@@ -38,6 +45,10 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
 
         this.signupFullNameEt = findViewById(R.id.signupFullNameEt);
         this.signupEmailEt = findViewById(R.id.signupEmailEt);
@@ -48,7 +59,6 @@ public class SignUpActivity extends AppCompatActivity {
         this.signupFacebookBtn = findViewById(R.id.signupFacebookBtn);
         this.signupSignInTv = findViewById(R.id.signupSignInTv);
 
-//        mAuth = FirebaseAuth.getInstance();
 
         signupBirthdateEt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +91,26 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+            // Check if user is signed in (non-null) and update UI accordingly.
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if(currentUser != null){
+                reload();
+
+        }
+    }
+
+    private void reload() {
+
     }
 
     private void showDateDialog(EditText createDateEt) {
@@ -207,7 +237,23 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        /*
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+/*
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -253,7 +299,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                     }
                 });
-*/
+ */
     }
+
+
 
 }

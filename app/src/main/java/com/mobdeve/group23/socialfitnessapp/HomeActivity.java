@@ -7,10 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     private static final int[] pics = {R.drawable.chicken_sq, R.drawable.cow_sq,
             R.drawable.goat_sq, R.drawable.pig_sq};
@@ -24,9 +29,14 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
         populateList();
         setupRecyclerView();
     }
+
+
 
     private void setupRecyclerView() {
         this.recyclerView = findViewById(R.id.homeRecyclerView);
