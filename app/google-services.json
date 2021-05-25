@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1036027665855",
+    "project_id": "mobdeve-s13-g23",
+    "storage_bucket": "mobdeve-s13-g23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036027665855:android:f1389ba8891e99bed4950a",
+        "android_client_info": {
+          "package_name": "com.mobdeve.group23.socialfitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036027665855-hju3entvm0chgcbjuqqoulrfnkehp7ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIKJZ_BuhpaCoXVoDpet7NwNl-3J4QkUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036027665855-hju3entvm0chgcbjuqqoulrfnkehp7ja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
