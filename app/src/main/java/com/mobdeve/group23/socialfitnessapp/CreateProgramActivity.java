@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
@@ -19,8 +21,14 @@ import java.util.Calendar;
 
 public class CreateProgramActivity extends AppCompatActivity {
 
+    private EditText createNameEt;
+    private EditText createDescriptionEt;
+    private Spinner createTypeSp;
     private EditText createDateEt;
     private EditText createTimeEt;
+    private EditText createLinkEt;
+    private TextView createFilenameTv;
+    private Button createProgramBtn;
 
 
     @Override
@@ -28,12 +36,17 @@ public class CreateProgramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_program);
 
+        this.createNameEt = findViewById(R.id.createNameEt);
+        this.createDescriptionEt = findViewById(R.id.createDescriptionEt);
+        this.createTypeSp = findViewById(R.id.createTypeSp);
         this.createDateEt = findViewById(R.id.createDateEt);
         this.createTimeEt = findViewById(R.id.createTimeEt);
+        this.createLinkEt = findViewById(R.id.createLinkEt);
+        this.createFilenameTv = findViewById(R.id.createFilenameTv);
+        this.createProgramBtn = findViewById(R.id.createProgramBtn);
 
         this.createDateEt.setInputType(InputType.TYPE_NULL);
         this.createTimeEt.setInputType(InputType.TYPE_NULL);
-
 
 
         createDateEt.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +60,13 @@ public class CreateProgramActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showTimeDialog(createTimeEt);
+            }
+        });
+
+        createProgramBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createProgram();
             }
         });
     }
@@ -84,6 +104,10 @@ public class CreateProgramActivity extends AppCompatActivity {
         };
 
         new TimePickerDialog(CreateProgramActivity.this, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+    }
+
+    private void createProgram() {
+        // not yet done
     }
 
 }

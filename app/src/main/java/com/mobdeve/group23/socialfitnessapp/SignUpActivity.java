@@ -64,6 +64,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        this.signupFacebookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SignUpActivity.this, CreateProgramActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
         this.signupSignInTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Date current = calendar.getTime();
                 int diff1 =new Date().compareTo(current);
 
+// for age
 //                int yearSelected = calendar.get(Calendar.YEAR);
 
 //                age = yearNow - yearSelected;
@@ -108,11 +118,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(diff1 < 0){
                     validDate = false;
-                    System.out.println(diff1);
                     return;
                 } else{
                     validDate = true;
-                    System.out.println(diff1);
                 }
 
 
@@ -128,7 +136,6 @@ public class SignUpActivity extends AppCompatActivity {
         String password = signupPasswordEt.getText().toString().trim();
         String confirmPassword = signupConfirmPasswordEt.getText().toString().trim();
         String birthdate = signupBirthdateEt.getText().toString().trim();
-        System.out.println(validDate);
 
         if(fullName.isEmpty()) {
             signupFullNameEt.setError("Full name is required!");
