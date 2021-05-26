@@ -27,6 +27,16 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginEmailEt;
     private EditText loginPasswordEt;
 
+
+
+
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             reload();
-
         }
     }
 
@@ -93,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed. LOGIN",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
