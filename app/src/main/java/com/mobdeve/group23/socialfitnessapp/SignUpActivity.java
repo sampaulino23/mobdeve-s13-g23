@@ -48,8 +48,6 @@ public class SignUpActivity extends AppCompatActivity {
     boolean validDate = false;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +55,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
-
 
         this.signupFullNameEt = findViewById(R.id.signupFullNameEt);
         this.signupEmailEt = findViewById(R.id.signupEmailEt);
@@ -80,11 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
         this.signupSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 registerUser();
                 storeUser();
-
-
             }
         });
 
@@ -292,12 +285,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast t = Toast.makeText(
-                                getApplicationContext(),
-                                "SUCCESS",
-                                Toast.LENGTH_SHORT
-                        );
-                        t.show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -312,7 +300,5 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 
 }

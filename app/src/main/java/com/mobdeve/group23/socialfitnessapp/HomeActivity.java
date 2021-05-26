@@ -42,9 +42,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-    private TextView textView2;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        this.textView2 = findViewById(R.id.textView2);
 
 
         populateList();
