@@ -174,6 +174,7 @@ public class HomeActivity extends AppCompatActivity {
                         oneProgram.setType(d.getData().get("type").toString());
                         oneProgram.setDateTime(d.getData().get("dateTime").toString());
                         oneProgram.setLink(d.getData().get("link").toString());
+                        oneProgram.setPhotoURL(d.getData().get("photoURL").toString());
 
                         programList.add(oneProgram);
                     }

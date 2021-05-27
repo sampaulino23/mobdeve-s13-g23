@@ -10,8 +10,8 @@ public class Program {
     private String dateTime;
     private String link;
     private int photo; //not sure yet
+    private String photoURL;
 
-    
     public Program(String name, String type, String description, String dateTime, String link, int photo) {
         this.name = name;
         this.type = type;
@@ -28,6 +28,7 @@ public class Program {
         this.dateTime = getDateTime();
         this.link = getLink();
         this.photo = getPhoto();
+        this.photoURL = getPhotoURL();
     }
 
     public String getName() {
@@ -76,6 +77,14 @@ public class Program {
 
     public void setPhoto(int photo) {
         this.photo = photo;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
 }

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class ProgramActivity extends AppCompatActivity {
 
     private TextView sProgramNameTv;
@@ -34,14 +36,19 @@ public class ProgramActivity extends AppCompatActivity {
         String sProgramDateTimeTv = i.getStringExtra("dateTime");
         String sProgramDescriptionTv = i.getStringExtra("description");
         String sProgramLinkTv = i.getStringExtra("link");
+        String sProgramPhotoURL = i.getStringExtra("photoURL");
         Bundle bundle = i.getExtras();
-        int sProgramPhotoIv = bundle.getInt("photo");
+//        int sProgramPhotoIv = bundle.getInt("photo");
 
         this.sProgramNameTv.setText(sProgramNameTv);
         this.sProgramTypeTv.setText(sProgramTypeTv);
         this.sProgramDateTimeTv.setText(sProgramDateTimeTv);
         this.sProgramDescriptionTv.setText(sProgramDescriptionTv);
         this.sProgramLinkTv.setText(sProgramLinkTv);
-        this.sProgramPhotoIv.setImageResource(sProgramPhotoIv);
+//        this.sProgramPhotoIv.setImageResource(sProgramPhotoIv);
+
+        Glide.with(this)
+                .load(sProgramPhotoURL)
+                .into(this.sProgramPhotoIv);
     }
 }

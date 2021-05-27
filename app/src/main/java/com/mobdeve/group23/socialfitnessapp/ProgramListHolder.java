@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProgramListHolder extends RecyclerView.ViewHolder{
 
 
-    private ImageView programPhotoIv;
+    public ImageView programPhotoIv;
     private TextView programNameTv;
     private TextView programTypeTv;
     private TextView programDateTimeTv;
@@ -43,4 +43,7 @@ public class ProgramListHolder extends RecyclerView.ViewHolder{
         this.programDateTimeTv.setText(programDateTimeTv);
     }
 
+    public ImageView getProgramPhotoIv() {
+        return programPhotoIv;
+    }
 }

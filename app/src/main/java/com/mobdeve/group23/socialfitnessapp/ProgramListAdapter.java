@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> {
@@ -37,6 +39,9 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         holder.setProgramNameTv(this.programList.get(position).getName());
         holder.setProgramTypeTv(this.programList.get(position).getType());
         holder.setProgramDateTimeTv(this.programList.get(position).getDateTime());
+        Glide.with(holder.itemView.getContext())
+                .load(this.programList.get(position).getPhotoURL())
+                .into(holder.programPhotoIv);
 
         //start new activity
         /*
@@ -57,6 +62,8 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         });
 
 
+
+
     }
 
     @Override
@@ -72,6 +79,7 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         i.putExtra("link", this.programList.get(position).getLink());
         i.putExtra("type", this.programList.get(position).getType());
         i.putExtra("photo", this.programList.get(position).getPhoto());
+        i.putExtra("photoURL", this.programList.get(position).getPhotoURL());
 
         v.getContext().startActivity(i);
 

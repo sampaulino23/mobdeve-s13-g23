@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,6 +70,9 @@ public class CreateProgramActivity extends AppCompatActivity {
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
+
+
+    String photoURL;
 
 
     @Override
@@ -222,7 +226,7 @@ public class CreateProgramActivity extends AppCompatActivity {
         String type = createTypeSp.getSelectedItem().toString().trim();
         String dateTime = createDateTimeEt.getText().toString().trim();
         String link = createLinkEt.getText().toString().trim();
-        String filename = createFilenameTv.getText().toString().trim();
+        String filename = photoURL;
 
         Map<String, Object> program = new HashMap<>();
         program.put("name", name);
@@ -232,6 +236,7 @@ public class CreateProgramActivity extends AppCompatActivity {
         program.put("link", link);
         program.put("programDate", programDate);
         program.put("creationDate", Timestamp.now());
+        program.put("photoURL", photoURL);
 
 
 // Add a new document with a generated ID
@@ -284,12 +289,22 @@ public class CreateProgramActivity extends AppCompatActivity {
         pd.show();
 
         final String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("images/" + randomKey);
+        StorageReference storageRef = storageReference.child("images/" + randomKey);
 
-        riversRef.putFile(imageUri)
+        storageRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        final Task<Uri> firebaseUri = taskSnapshot.getStorage().getDownloadUrl();
+                        firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                System.out.println("INSIDE BEFORE " + photoURL);
+                                photoURL = uri.toString();
+                                System.out.println("INSIDE AFTER " + photoURL);
+                            }
+                        });
+
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
                     }
@@ -301,13 +316,13 @@ public class CreateProgramActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Failed To Upload", Toast.LENGTH_LONG).show();
                     }
                 })
-        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                pd.setMessage("Percentage: " + (int) progressPercent + "%");
-            }
-        });
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Percentage: " + (int) progressPercent + "%");
+                    }
+                });
     }
 
 }
