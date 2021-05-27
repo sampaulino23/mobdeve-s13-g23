@@ -29,6 +29,7 @@ public class ProgramActivity extends AppCompatActivity {
         this.sProgramDescriptionTv = findViewById(R.id.sProgramDescriptionTv);
         this.sProgramLinkTv = findViewById(R.id.sProgramLinkTv);
         this.sProgramPhotoIv = findViewById(R.id.sProgramPhotoIv);
+        
 
         Intent i = getIntent();
         String sProgramNameTv = i.getStringExtra("name");
