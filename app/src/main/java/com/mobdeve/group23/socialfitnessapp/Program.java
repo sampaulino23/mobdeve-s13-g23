@@ -11,7 +11,7 @@ public class Program {
     private String link;
     private int photo; //not sure yet
 
-
+    
     public Program(String name, String type, String description, String dateTime, String link, int photo) {
         this.name = name;
         this.type = type;
