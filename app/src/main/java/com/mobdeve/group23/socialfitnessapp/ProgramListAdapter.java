@@ -36,8 +36,7 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         holder.setProgramPhotoIv(this.programList.get(position).getPhoto());
         holder.setProgramNameTv(this.programList.get(position).getName());
         holder.setProgramTypeTv(this.programList.get(position).getType());
-        holder.setProgramDateTv(this.programList.get(position).getDate());
-        holder.setProgramTimeTv(this.programList.get(position).getTime());
+        holder.setProgramDateTimeTv(this.programList.get(position).getDateTime());
 
         //start new activity
         /*
@@ -68,8 +67,7 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
     public void setIntent(View v, int position) {
         Intent i = new Intent(v.getContext(), ProgramActivity.class);
         i.putExtra("name", this.programList.get(position).getName());
-        i.putExtra("date", this.programList.get(position).getDate());
-        i.putExtra("time", this.programList.get(position).getTime());
+        i.putExtra("dateTime", this.programList.get(position).getDateTime());
         i.putExtra("description", this.programList.get(position).getDescription());
         i.putExtra("link", this.programList.get(position).getLink());
         i.putExtra("type", this.programList.get(position).getType());

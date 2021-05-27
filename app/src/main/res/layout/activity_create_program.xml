@@ -77,52 +77,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="251dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/createDateTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date" />
-
-            <EditText
-                android:id="@+id/createDateEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:inputType="date"
-                android:textColor="#000000" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/createDateTimeTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Date and Time" />
 
-            <TextView
-                android:id="@+id/createTimeTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Time" />
-
-            <EditText
-                android:id="@+id/createTimeEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:inputType="time"
-                android:textColor="#000000" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/createDateTimeEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="datetime"
+            android:textColor="#000000" />
 
     </LinearLayout>
 
@@ -163,6 +134,7 @@
             android:id="@+id/createUploadIcon"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/uploadimage"
             tools:srcCompat="@drawable/uploadimage" />
 
@@ -175,6 +147,7 @@
             android:text="filename.jpg"
             android:textColor="#000000"
             android:visibility="gone" />
+
     </LinearLayout>
 
     <Space

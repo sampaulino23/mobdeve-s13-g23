@@ -11,8 +11,7 @@ public class ProgramActivity extends AppCompatActivity {
 
     private TextView sProgramNameTv;
     private TextView sProgramTypeTv;
-    private TextView sProgramDateTv;
-    private TextView sProgramTimeTv;
+    private TextView sProgramDateTimeTv;
     private TextView sProgramDescriptionTv;
     private TextView sProgramLinkTv;
     private ImageView sProgramPhotoIv;
@@ -24,8 +23,7 @@ public class ProgramActivity extends AppCompatActivity {
 
         this.sProgramNameTv = findViewById(R.id.sProgramNameTv);
         this.sProgramTypeTv = findViewById(R.id.sProgramTypeTv);
-        this.sProgramDateTv = findViewById(R.id.sProgramDateTv);
-        this.sProgramTimeTv = findViewById(R.id.sProgramTimeTv);
+        this.sProgramDateTimeTv = findViewById(R.id.sProgramDateTimeTv);
         this.sProgramDescriptionTv = findViewById(R.id.sProgramDescriptionTv);
         this.sProgramLinkTv = findViewById(R.id.sProgramLinkTv);
         this.sProgramPhotoIv = findViewById(R.id.sProgramPhotoIv);
@@ -33,8 +31,7 @@ public class ProgramActivity extends AppCompatActivity {
         Intent i = getIntent();
         String sProgramNameTv = i.getStringExtra("name");
         String sProgramTypeTv = i.getStringExtra("type");
-        String sProgramDateTv = i.getStringExtra("date");
-        String sProgramTimeTv = i.getStringExtra("time");
+        String sProgramDateTimeTv = i.getStringExtra("dateTime");
         String sProgramDescriptionTv = i.getStringExtra("description");
         String sProgramLinkTv = i.getStringExtra("link");
         Bundle bundle = i.getExtras();
@@ -42,8 +39,7 @@ public class ProgramActivity extends AppCompatActivity {
 
         this.sProgramNameTv.setText(sProgramNameTv);
         this.sProgramTypeTv.setText(sProgramTypeTv);
-        this.sProgramDateTv.setText(sProgramDateTv);
-        this.sProgramTimeTv.setText(sProgramTimeTv);
+        this.sProgramDateTimeTv.setText(sProgramDateTimeTv);
         this.sProgramDescriptionTv.setText(sProgramDescriptionTv);
         this.sProgramLinkTv.setText(sProgramLinkTv);
         this.sProgramPhotoIv.setImageResource(sProgramPhotoIv);

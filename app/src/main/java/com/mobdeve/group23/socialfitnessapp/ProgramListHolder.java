@@ -13,8 +13,7 @@ public class ProgramListHolder extends RecyclerView.ViewHolder{
     private ImageView programPhotoIv;
     private TextView programNameTv;
     private TextView programTypeTv;
-    private TextView programDateTv;
-    private TextView programTimeTv;
+    private TextView programDateTimeTv;
 
 
 
@@ -24,8 +23,7 @@ public class ProgramListHolder extends RecyclerView.ViewHolder{
         this.programPhotoIv = itemView.findViewById(R.id.programPhotoIv);
         this.programNameTv = itemView.findViewById(R.id.programNameTv);
         this.programTypeTv = itemView.findViewById(R.id.programTypeTv);
-        this.programDateTv = itemView.findViewById(R.id.programDateTv);
-        this.programTimeTv = itemView.findViewById(R.id.programTimeTv);
+        this.programDateTimeTv = itemView.findViewById(R.id.programDateTimeTv);
 
     }
 
@@ -41,11 +39,8 @@ public class ProgramListHolder extends RecyclerView.ViewHolder{
         this.programTypeTv.setText(programTypeTv);
     }
 
-    public void setProgramDateTv(String programDateTv) {
-        this.programDateTv.setText(programDateTv);
+    public void setProgramDateTimeTv(String programDateTimeTv) {
+        this.programDateTimeTv.setText(programDateTimeTv);
     }
 
-    public void setProgramTimeTv(String programTimeTv) {
-        this.programTimeTv.setText(programTimeTv);
-    }
 }

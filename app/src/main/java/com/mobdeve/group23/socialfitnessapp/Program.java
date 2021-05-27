@@ -7,18 +7,16 @@ public class Program {
     private String name;
     private String type;
     private String description;
-    private String date;
-    private String time;
+    private String dateTime;
     private String link;
     private int photo; //not sure yet
 
 
-    public Program(String name, String type, String description, String date, String time, String link, int photo) {
+    public Program(String name, String type, String description, String dateTime, String link, int photo) {
         this.name = name;
         this.type = type;
         this.description = description;
-        this.date = date;
-        this.time = time;
+        this.dateTime = dateTime;
         this.link = link;
         this.photo = photo;
     }
@@ -27,8 +25,7 @@ public class Program {
         this.name = getName();
         this.type = getType();
         this.description = getDescription();
-        this.date = getDate();
-        this.time = getTime();
+        this.dateTime = getDateTime();
         this.link = getLink();
         this.photo = getPhoto();
     }
@@ -57,20 +54,12 @@ public class Program {
         this.description = description;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getLink() {

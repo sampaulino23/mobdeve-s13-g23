@@ -93,8 +93,6 @@ public class SignUpActivity extends AppCompatActivity {
         this.signupSignInTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
@@ -272,7 +270,6 @@ public class SignUpActivity extends AppCompatActivity {
         String fullName = signupFullNameEt.getText().toString().trim();
         String email = signupEmailEt.getText().toString().trim();
         String birthdate = signupBirthdateEt.getText().toString().trim();
-
 
         Map<String, Object> user = new HashMap<>();
         user.put("fullName", fullName);
