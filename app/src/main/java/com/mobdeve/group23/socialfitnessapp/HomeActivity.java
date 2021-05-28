@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,9 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -31,8 +38,9 @@ import java.util.Random;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String email;
 
     private static final int[] pics = {R.drawable.chicken_sq, R.drawable.cow_sq,
             R.drawable.goat_sq, R.drawable.pig_sq};
@@ -62,8 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         db = FirebaseFirestore.getInstance();
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+
 
         this.homeSortSp = findViewById(R.id.homeSortSp);
         this.homeWorkoutTBtn = findViewById(R.id.homeWorkoutTBtn);
@@ -71,6 +78,48 @@ public class HomeActivity extends AppCompatActivity {
         this.homeSeminarTBtn = findViewById(R.id.homeSeminarTBtn);
         this.homeOthersTBtn = findViewById(R.id.homeOthersTBtn);
         this.homeCreateProgramBtn = findViewById(R.id.homeCreateProgramBtn);
+
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                email = profile.getEmail();
+            }
+            // Name, email address, and profile photo Url
+
+        }
+
+
+        DocumentReference docRef = db.collection("users").document("aLLEI2Rqk8h0u5DjtHLy");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        String admin = document.getData().get("email").toString();
+                        System.out.println("ADMIN" + admin);
+                        System.out.println("EMAIL" + email);
+
+
+                        if (admin.equals(email)) {
+                            homeCreateProgramBtn.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
+                        }
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
+
+
+
+
+
 
         System.out.println(workoutFilter);
 
