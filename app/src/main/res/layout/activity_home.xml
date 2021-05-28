@@ -21,81 +21,76 @@
             android:paddingTop="8dp"
             android:paddingBottom="4dp">
 
+            <Spinner
+                android:id="@+id/homeSortSp"
+                android:layout_width="125dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/dropdown_color" />
+<!--                android:entries="@array/Sort_items" -->
+
+
             <ToggleButton
                 android:id="@+id/homeWorkoutTBtn"
-                android:layout_width="100dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="9dp"
                 android:layout_marginEnd="3dp"
                 android:checked="false"
                 android:textAllCaps="false"
                 android:textOff="Workout"
-                android:textOn="Workout" />
+                android:textOn="Workout"
+                android:textSize="12sp" />
 
             <ToggleButton
                 android:id="@+id/homeNutritionTBtn"
-                android:layout_width="100dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
                 android:checked="false"
                 android:textAllCaps="false"
                 android:textOff="Nutrition"
-                android:textOn="Nutrition" />
+                android:textOn="Nutrition"
+                android:textSize="12sp" />
 
             <ToggleButton
                 android:id="@+id/homeSeminarTBtn"
-                android:layout_width="100dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
                 android:checked="false"
                 android:textAllCaps="false"
                 android:textOff="Seminar"
-                android:textOn="Seminar" />
+                android:textOn="Seminar"
+                android:textSize="12sp" />
 
             <ToggleButton
                 android:id="@+id/homeOthersTBtn"
-                android:layout_width="100dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="9dp"
                 android:checked="false"
                 android:textAllCaps="false"
                 android:textOff="Others"
-                android:textOn="Others" />
+                android:textOn="Others"
+                android:textSize="12sp" />
+
         </LinearLayout>
     </HorizontalScrollView>
 
 
-
     <Button
         android:id="@+id/homeCreateProgramBtn"
-        android:layout_width="224dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Create Program"
         android:textAllCaps="false"
         android:visibility="gone" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/homeSortTv"
-            android:layout_width="302dp"
-            android:layout_height="match_parent"
-            android:gravity="bottom|right"
-            android:text="Sort by " />
-
-        <Spinner
-            android:id="@+id/homeSortSp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom" />
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeRecyclerView"

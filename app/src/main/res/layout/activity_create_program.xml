@@ -64,11 +64,54 @@
         android:layout_height="wrap_content"
         android:text="Program Type" />
 
+    <RadioGroup
+        android:id="@+id/createTypeRGrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/createWorkoutRBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Workout"
+            android:textSize="15sp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/createNutritionRBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Nutrition"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/createSeminarRBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Seminar"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/createOthersRBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Others"
+            android:textSize="15sp" />
+
+    </RadioGroup>
+
     <Spinner
         android:id="@+id/createTypeSp"
         android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/Type_items" />
+        android:layout_height="41dp"
+        android:entries="@array/Type_items"
+        android:visibility="gone" />
 
     <Space
         android:layout_width="match_parent"

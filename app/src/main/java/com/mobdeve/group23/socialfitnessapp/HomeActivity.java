@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -37,11 +41,14 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<Program> temp;
     private RecyclerView recyclerView;
 
+    private Spinner homeSortSp;
     private ToggleButton homeWorkoutTBtn;
     private ToggleButton homeNutritionTBtn;
     private ToggleButton homeSeminarTBtn;
     private ToggleButton homeOthersTBtn;
     private Button homeCreateProgramBtn;
+
+    int dateSort = 3; // 0 - closest to nearest;  1 - nearest to closest; 2 - oldest to newest; 3 - newest to oldest;
 
     boolean workoutFilter = false;
     boolean nutritionFilter = false;
@@ -58,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        this.homeSortSp = findViewById(R.id.homeSortSp);
         this.homeWorkoutTBtn = findViewById(R.id.homeWorkoutTBtn);
         this.homeNutritionTBtn = findViewById(R.id.homeNutritionTBtn);
         this.homeSeminarTBtn = findViewById(R.id.homeSeminarTBtn);
@@ -66,8 +74,60 @@ public class HomeActivity extends AppCompatActivity {
 
         System.out.println(workoutFilter);
 
-        populateList();
-        setupRecyclerView();
+//        populateList();
+//        setupRecyclerView();
+
+        ArrayList<String> sortOptions = new ArrayList<>();
+        sortOptions.add(0, "Date added ▼");
+        sortOptions.add("Date added ▲");
+        sortOptions.add("Date of program ▼");
+        sortOptions.add("Date of program ▲");
+
+
+
+        
+        ArrayAdapter<Object> dataAdapter;
+        dataAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, sortOptions);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        this.homeSortSp.setAdapter(dataAdapter);
+
+        this.homeSortSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).equals("Date of program ▲")) {
+                    dateSort = 0;
+                    populateList();
+                    setupRecyclerView();
+                }
+                else if (parent.getItemAtPosition(position).equals("Date of program ▼")) {
+                    dateSort = 1;
+                    populateList();
+                    setupRecyclerView();
+                }
+                else if (parent.getItemAtPosition(position).equals("Date added ▲")) {
+                    dateSort = 2;
+                    populateList();
+                    setupRecyclerView();
+                }
+                else if (parent.getItemAtPosition(position).equals("Date added ▼")) {
+                    dateSort = 3;
+                    populateList();
+                    setupRecyclerView();
+                }
+                else {
+                    dateSort = 3;
+                    populateList();
+                    setupRecyclerView();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         this.homeWorkoutTBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +135,11 @@ public class HomeActivity extends AppCompatActivity {
                 if(homeWorkoutTBtn.isChecked()) {
                     workoutFilter = true;
                     populateList();
+                    setupRecyclerView();
                 } else {
                     workoutFilter = false;
                     populateList();
+                    setupRecyclerView();
                 }
             }
         });
@@ -88,9 +150,11 @@ public class HomeActivity extends AppCompatActivity {
                 if(homeNutritionTBtn.isChecked()) {
                     nutritionFilter = true;
                     populateList();
+                    setupRecyclerView();
                 } else {
                     nutritionFilter = false;
                     populateList();
+                    setupRecyclerView();
                 }
             }
         });
@@ -101,9 +165,11 @@ public class HomeActivity extends AppCompatActivity {
                 if(homeSeminarTBtn.isChecked()) {
                     seminarFilter = true;
                     populateList();
+                    setupRecyclerView();
                 } else {
                     seminarFilter = false;
                     populateList();
+                    setupRecyclerView();
                 }
             }
         });
@@ -114,9 +180,11 @@ public class HomeActivity extends AppCompatActivity {
                 if(homeOthersTBtn.isChecked()) {
                     othersFilter = true;
                     populateList();
+                    setupRecyclerView();
                 } else {
                     othersFilter = false;
                     populateList();
+                    setupRecyclerView();
                 }
             }
         });
@@ -129,10 +197,10 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
-
-
+    
     private void setupRecyclerView() {
         this.recyclerView = findViewById(R.id.homeRecyclerView);
         //LayoutManager
@@ -154,7 +222,9 @@ public class HomeActivity extends AppCompatActivity {
 
         sample = new Program();
 
-        filterQuery(workoutFilter, nutritionFilter, seminarFilter, othersFilter).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        System.out.println("workoutFilter=" + workoutFilter + " nutritionFilter=" + nutritionFilter + " seminarFilter=" + seminarFilter + " othersFilter=" + othersFilter + " dateSort=" + dateSort);
+
+        filterQuery(workoutFilter, nutritionFilter, seminarFilter, othersFilter, dateSort).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -248,50 +318,168 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private Query filterQuery(boolean workout, boolean nutrition, boolean seminar, boolean others) {
-        Query filter = db.collection("programs").orderBy("creationDate", Query.Direction.DESCENDING);
+    private Query filterQuery(boolean workout, boolean nutrition, boolean seminar, boolean others, int dateSort) {
+        Query filter = db.collection("programs").orderBy("programDate", Query.Direction.ASCENDING);
 
         if (workout == true && nutrition == false && seminar == false && others == false) {
-            filter = db.collection("programs").whereEqualTo("type", "Workout").orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereEqualTo("type", "Workout").orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereEqualTo("type", "Workout").orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereEqualTo("type", "Workout").orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereEqualTo("type", "Workout").orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == true && seminar == false && others == false) {
-            filter = db.collection("programs").whereEqualTo("type", "Nutrition").orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereEqualTo("type", "Nutrition").orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereEqualTo("type", "Nutrition").orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereEqualTo("type", "Nutrition").orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereEqualTo("type", "Nutrition").orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == false && seminar == true && others == false) {
-            filter = db.collection("programs").whereEqualTo("type", "Seminar").orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereEqualTo("type", "Seminar").orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereEqualTo("type", "Seminar").orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereEqualTo("type", "Seminar").orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereEqualTo("type", "Seminar").orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == false && seminar == false && others == true) {
-            filter = db.collection("programs").whereEqualTo("type", "Others").orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereEqualTo("type", "Others").orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereEqualTo("type", "Others").orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereEqualTo("type", "Others").orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereEqualTo("type", "Others").orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == false && seminar == true && others == true) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Seminar", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Seminar", "Others")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Seminar", "Others")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Seminar", "Others")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Seminar", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == true && seminar == false && others == true) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Others")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Others")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Others")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == true && seminar == true && others == false) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == false && nutrition == true && seminar == true && others == true) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar", "Others")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar", "Others")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar", "Others")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Nutrition", "Seminar", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == true && nutrition == false && seminar == false && others == true) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Others")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Others")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Others")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == true && nutrition == false && seminar == true && others == false) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == true && nutrition == false && seminar == true && others == true) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar", "Others")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar", "Others")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar", "Others")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Seminar", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == true && nutrition == true && seminar == false && others == false) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == true && nutrition == true && seminar == false && others == true) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Others")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Others")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Others")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Others")).orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else if (workout == true && nutrition == true && seminar == true && others == false) {
-            filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Seminar")).orderBy("creationDate", Query.Direction.DESCENDING);
+            if (dateSort == 0)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Seminar")).orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Seminar")).orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Seminar")).orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").whereIn("type", Arrays.asList("Workout", "Nutrition", "Seminar")).orderBy("creationDate", Query.Direction.DESCENDING);
+        }
+        else if (workout == false && nutrition == false && seminar == false && others == false) {
+            if (dateSort == 0)
+                filter = db.collection("programs").orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").orderBy("creationDate", Query.Direction.DESCENDING);
+        }
+        else if (workout == true && nutrition == true && seminar == true && others == true) {
+            if (dateSort == 0)
+                filter = db.collection("programs").orderBy("programDate", Query.Direction.ASCENDING);
+            else if (dateSort == 1)
+                filter = db.collection("programs").orderBy("programDate", Query.Direction.DESCENDING);
+            else if (dateSort == 2)
+                filter = db.collection("programs").orderBy("creationDate", Query.Direction.ASCENDING);
+            else if (dateSort == 3)
+                filter = db.collection("programs").orderBy("creationDate", Query.Direction.DESCENDING);
         }
         else {
             filter = db.collection("programs").orderBy("creationDate", Query.Direction.DESCENDING);
@@ -299,4 +487,5 @@ public class HomeActivity extends AppCompatActivity {
 
         return filter;
     }
+
 }

@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,7 +55,13 @@ public class CreateProgramActivity extends AppCompatActivity {
 
     private EditText createNameEt;
     private EditText createDescriptionEt;
-    private Spinner createTypeSp;
+    private RadioGroup createTypeRGrp;
+    private RadioButton createTypeRBtn;
+    private RadioButton createWorkoutRBtn;
+    private RadioButton createNutritionRBtn;
+    private RadioButton createSeminarRBtn;
+    private RadioButton createOthersRBtn;
+//    private Spinner createTypeSp;
     private EditText createDateTimeEt;
     private EditText createLinkEt;
     private TextView createFilenameTv;
@@ -87,7 +95,12 @@ public class CreateProgramActivity extends AppCompatActivity {
 
         this.createNameEt = findViewById(R.id.createNameEt);
         this.createDescriptionEt = findViewById(R.id.createDescriptionEt);
-        this.createTypeSp = findViewById(R.id.createTypeSp);
+        this.createTypeRGrp = findViewById(R.id.createTypeRGrp);
+//        this.createTypeSp = findViewById(R.id.createTypeSp);
+        this.createWorkoutRBtn = findViewById(R.id.createWorkoutRBtn);
+        this.createNutritionRBtn = findViewById(R.id.createNutritionRBtn);
+        this.createSeminarRBtn = findViewById(R.id.createSeminarRBtn);
+        this.createOthersRBtn = findViewById(R.id.createOthersRBtn);
         this.createDateTimeEt = findViewById(R.id.createDateTimeEt);
         this.createLinkEt = findViewById(R.id.createLinkEt);
         this.createFilenameTv = findViewById(R.id.createFilenameTv);
@@ -116,6 +129,7 @@ public class CreateProgramActivity extends AppCompatActivity {
                 choosePhoto();
             }
         });
+
     }
 
     private void showDateTimeDialog(EditText createDateTimeEt) {
@@ -162,7 +176,10 @@ public class CreateProgramActivity extends AppCompatActivity {
     private void createProgram() {
         String name = createNameEt.getText().toString().trim();
         String description = createDescriptionEt.getText().toString().trim();
-        String type = createTypeSp.getSelectedItem().toString().trim();
+        int radioId = createTypeRGrp.getCheckedRadioButtonId();
+        createTypeRBtn = findViewById(radioId);
+        String type = createTypeRBtn.getText().toString();
+//        String type = createTypeSp.getSelectedItem().toString().trim();
         String dateTime = createDateTimeEt.getText().toString().trim();
         String link = createLinkEt.getText().toString().trim();
         String filename = createFilenameTv.getText().toString().trim();
@@ -223,10 +240,14 @@ public class CreateProgramActivity extends AppCompatActivity {
 
         String name = createNameEt.getText().toString().trim();
         String description = createDescriptionEt.getText().toString().trim();
-        String type = createTypeSp.getSelectedItem().toString().trim();
+        int radioId = createTypeRGrp.getCheckedRadioButtonId();
+        createTypeRBtn = findViewById(radioId);
+        String type = createTypeRBtn.getText().toString();
+//        String type = createTypeSp.getSelectedItem().toString().trim();
         String dateTime = createDateTimeEt.getText().toString().trim();
         String link = createLinkEt.getText().toString().trim();
         String filename = photoURL;
+
 
         Map<String, Object> program = new HashMap<>();
         program.put("name", name);
@@ -299,9 +320,7 @@ public class CreateProgramActivity extends AppCompatActivity {
                         firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                System.out.println("INSIDE BEFORE " + photoURL);
                                 photoURL = uri.toString();
-                                System.out.println("INSIDE AFTER " + photoURL);
                             }
                         });
 
