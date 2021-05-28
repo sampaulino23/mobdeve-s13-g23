@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signupSignUpBtn;
     private Button signupFacebookBtn;
     private TextView signupSignInTv;
+    private ProgressBar signupProgressBar;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -64,6 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.signupSignUpBtn = findViewById(R.id.signupSignUpBtn);
         this.signupFacebookBtn = findViewById(R.id.signupFacebookBtn);
         this.signupSignInTv = findViewById(R.id.signupSignInTv);
+        this.signupProgressBar = findViewById(R.id.signupProgressBar);
 
 
         signupBirthdateEt.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +80,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
-                storeUser();
             }
         });
 
@@ -108,16 +110,19 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-            // Check if user is signed in (non-null) and update UI accordingly.
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(currentUser != null){
-                reload();
-
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        
+        if(currentUser != null){
+            System.out.println("UID: " + currentUser.getUid() + "       Email: " + currentUser.getEmail());
+            reload();
         }
     }
 
     private void reload() {
-
+        Intent i = new Intent(SignUpActivity.this, HomeActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void showDateDialog(EditText createDateEt) {
@@ -181,43 +186,43 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        if(email.isEmpty()) {
+        else if(email.isEmpty()) {
             signupEmailEt.setError("Email is required!");
             signupEmailEt.requestFocus();
             return;
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             signupEmailEt.setError("Please provide a valid email!");
             signupEmailEt.requestFocus();
             return;
         }
 
-        if(password.isEmpty()) {
+        else if(password.isEmpty()) {
             signupPasswordEt.setError("Password is required!");
             signupPasswordEt.requestFocus();
             return;
         }
 
-        if(password.length() < 6) {
+        else if(password.length() < 6) {
             signupPasswordEt.setError("Minimum password length should be 6 characters!");
             signupPasswordEt.requestFocus();
             return;
         }
 
-        if(confirmPassword.isEmpty()) {
+        else if(confirmPassword.isEmpty()) {
             signupConfirmPasswordEt.setError("Confirm Password is required!");
             signupConfirmPasswordEt.requestFocus();
             return;
         }
 
-        if(!password.equals(confirmPassword)) {
+        else if(!password.equals(confirmPassword)) {
             signupConfirmPasswordEt.setError("Passwords do not match!");
             signupConfirmPasswordEt.requestFocus();
             return;
         }
 
-        if(birthdate.isEmpty()) {
+        else if(birthdate.isEmpty()) {
             signupBirthdateEt.setError("Birthdate is required!");
             signupBirthdateEt.requestFocus();
 
@@ -231,7 +236,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        if(!validDate) {
+        else if(!validDate) {
             signupBirthdateEt.setError("Invalid Birthdate!");
             signupBirthdateEt.requestFocus();
 
@@ -245,25 +250,30 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+        else {
+            signupProgressBar.setVisibility(View.VISIBLE);
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                storeUser();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                signupProgressBar.setVisibility(View.INVISIBLE);
+                                Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                signupProgressBar.setVisibility(View.GONE);
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
-
 
     private void storeUser() {
 
@@ -275,6 +285,7 @@ public class SignUpActivity extends AppCompatActivity {
         user.put("fullName", fullName);
         user.put("email", email);
         user.put("birthdate", birthdate);
+        user.put("isAdmin", "false");
 
 // Add a new document with a generated ID
         db.collection("users")
@@ -297,5 +308,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
 }

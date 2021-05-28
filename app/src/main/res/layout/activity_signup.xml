@@ -104,9 +104,14 @@
         android:text="Connect with Facebook"
         android:textAllCaps="false" />
 
-    <Space
+    <ProgressBar
+        android:id="@+id/signupProgressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="62dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -126,10 +131,15 @@
             android:id="@+id/signupSignInTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="start"
             android:paddingStart="5dp"
-            android:text="Sign In" />
+            android:text="Sign In"
+            android:textColor="#000FF6" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

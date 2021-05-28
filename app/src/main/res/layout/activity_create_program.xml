@@ -201,7 +201,7 @@
         android:id="@+id/createProgramBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Program"
+        android:text="Create"
         android:textAllCaps="false" />
 
 </LinearLayout>

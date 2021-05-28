@@ -41,6 +41,7 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         holder.setProgramDateTimeTv(this.programList.get(position).getDateTime());
         Glide.with(holder.itemView.getContext())
                 .load(this.programList.get(position).getPhotoURL())
+                .placeholder(R.drawable.fitness)
                 .into(holder.programPhotoIv);
 
         //start new activity

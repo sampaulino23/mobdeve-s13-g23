@@ -68,11 +68,14 @@ public class CreateProgramActivity extends AppCompatActivity {
     private Button createProgramBtn;
     private ImageView createUploadIcon;
 
+
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
     boolean validProgramDate = false;
     Date programDate;
+    Date notificationDate;
 
     // for uploading images
     private Uri imageUri;
@@ -92,6 +95,8 @@ public class CreateProgramActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+
+
 
         this.createNameEt = findViewById(R.id.createNameEt);
         this.createDescriptionEt = findViewById(R.id.createDescriptionEt);
@@ -134,6 +139,7 @@ public class CreateProgramActivity extends AppCompatActivity {
 
     private void showDateTimeDialog(EditText createDateTimeEt) {
         Calendar calendar = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
 
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -143,13 +149,22 @@ public class CreateProgramActivity extends AppCompatActivity {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
+                calendar2.set(Calendar.YEAR, year);
+                calendar2.set(Calendar.MONTH, month);
+                calendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
                 TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         calendar.set(Calendar.MINUTE, minute);
 
+                        calendar2.set(Calendar.HOUR_OF_DAY, hourOfDay-1);
+                        calendar2.set(Calendar.MINUTE, minute);
+
                         programDate = calendar.getTime();
+                        notificationDate = calendar2.getTime();
+
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy   hh:mm aa");
                         createDateTimeEt.setText(simpleDateFormat.format(calendar.getTime()));
                     }
@@ -230,6 +245,17 @@ public class CreateProgramActivity extends AppCompatActivity {
             return;
         }
 
+        else if(photoURL == null) {
+            Toast t = Toast.makeText(
+                    getApplicationContext(),
+                    "Uploading a photo is required!",
+                    Toast.LENGTH_SHORT
+            );
+            t.show();
+
+            return;
+        }
+
         else {
             storeProgram();
         }
@@ -256,6 +282,7 @@ public class CreateProgramActivity extends AppCompatActivity {
         program.put("dateTime", dateTime);
         program.put("link", link);
         program.put("programDate", programDate);
+        program.put("notificationDate", notificationDate);
         program.put("creationDate", Timestamp.now());
         program.put("photoURL", photoURL);
 

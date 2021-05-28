@@ -8,10 +8,10 @@
         <item>Others</item>
     </string-array>
 
-<!--    <string-array name="Sort_items">-->
-<!--        <item>Date of program ▲</item>-->
-<!--        <item>Date of program ▼</item>-->
-<!--        <item>Date added ▲</item>-->
-<!--        <item>Date added ▼</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Sort_items">-->
+    <!--        <item>Date of program ▲</item>-->
+    <!--        <item>Date of program ▼</item>-->
+    <!--        <item>Date added ▲</item>-->
+    <!--        <item>Date added ▼</item>-->
+    <!--    </string-array>-->
 </resources>

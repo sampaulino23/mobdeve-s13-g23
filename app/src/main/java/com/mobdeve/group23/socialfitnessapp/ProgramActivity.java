@@ -58,7 +58,7 @@ public class ProgramActivity extends AppCompatActivity {
 
         }
 
-        DocumentReference docRef = db.collection("users").document("aLLEI2Rqk8h0u5DjtHLy");
+        DocumentReference docRef = db.collection("users").document("3LRBU41L2e5OJpr9vgnU");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -106,6 +106,7 @@ public class ProgramActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(sProgramPhotoURL)
+                .placeholder(R.drawable.fitness)
                 .into(this.sProgramPhotoIv);
     }
 }
