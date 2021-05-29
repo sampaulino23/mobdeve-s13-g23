@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -84,6 +85,7 @@ public class CreateProgramActivity extends AppCompatActivity {
 
 
     String photoURL;
+    String programID;
 
 
     @Override
@@ -286,6 +288,10 @@ public class CreateProgramActivity extends AppCompatActivity {
         program.put("creationDate", Timestamp.now());
         program.put("photoURL", photoURL);
 
+        DocumentReference ref = db.collection("programs").document();
+        String id = ref.getId();
+        program.put("id", id);
+
 
 // Add a new document with a generated ID
         db.collection("programs")
@@ -293,9 +299,36 @@ public class CreateProgramActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+
+
+
+                        String programID = documentReference.getId();
+                        System.out.println("PROGRAM ID" + id);
+
                         Intent i = new Intent(CreateProgramActivity.this, HomeActivity.class);
                         startActivity(i);
                         finish();
+                        program.put("id", programID);
+
+                        System.out.println("PROGRAM ID 2" + programID);
+
+
+
+                        db.collection("programs").document(programID)
+                                .set(program)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("TAG", "Error writing document", e);
+                                    }
+                                });
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

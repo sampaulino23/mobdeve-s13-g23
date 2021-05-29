@@ -10,9 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +23,9 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProgramActivity extends AppCompatActivity {
 
@@ -75,7 +81,7 @@ public class ProgramActivity extends AppCompatActivity {
                             sProgramJoinBtn.setVisibility(View.GONE);
                         }
                         else {
-                            Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
+                            Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getId());
                         }
                     } else {
                         Log.d("TAG", "No such document");
@@ -83,6 +89,40 @@ public class ProgramActivity extends AppCompatActivity {
                 } else {
                     Log.d("TAG", "get failed with ", task.getException());
                 }
+            }
+        });
+
+
+
+        sProgramJoinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Map<String, Object> usersJoined = new HashMap<>();
+                usersJoined.put("email", email);
+                usersJoined.put("programID", "CA");
+
+                db.collection("usersJoined").add(usersJoined)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Intent i = new Intent(ProgramActivity.this, HomeActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast t = Toast.makeText(
+                                        getApplicationContext(),
+                                        "FAILED",
+                                        Toast.LENGTH_SHORT
+                                );
+                                t.show();
+                            }
+                        });
+
             }
         });
         

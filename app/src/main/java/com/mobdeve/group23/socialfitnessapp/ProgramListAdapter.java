@@ -85,4 +85,6 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         v.getContext().startActivity(i);
 
     }
+
+
 }
