@@ -1,12 +1,6 @@
 package com.mobdeve.group23.socialfitnessapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,9 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -128,10 +126,19 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         if (admin.equals(email)) {
+<<<<<<< Updated upstream
                             //ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
                             //params.height=1211;
                             homeCreateProgramLL.setVisibility(View.VISIBLE);
                             //recyclerView.setLayoutParams(params);
+=======
+                            ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
+                            if (params != null) {
+                                params.height = 1211;
+                                homeCreateProgramLL.setVisibility(View.VISIBLE);
+                                recyclerView.setLayoutParams(params);
+                            }
+>>>>>>> Stashed changes
                         }
                         else {
                             Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
