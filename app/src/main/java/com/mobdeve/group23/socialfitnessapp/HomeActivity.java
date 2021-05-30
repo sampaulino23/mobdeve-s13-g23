@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -126,19 +125,11 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         if (admin.equals(email)) {
-<<<<<<< Updated upstream
+
                             //ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
                             //params.height=1211;
                             homeCreateProgramLL.setVisibility(View.VISIBLE);
                             //recyclerView.setLayoutParams(params);
-=======
-                            ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
-                            if (params != null) {
-                                params.height = 1211;
-                                homeCreateProgramLL.setVisibility(View.VISIBLE);
-                                recyclerView.setLayoutParams(params);
-                            }
->>>>>>> Stashed changes
                         }
                         else {
                             Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
