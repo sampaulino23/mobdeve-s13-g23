@@ -39,6 +39,7 @@ public class ProgramActivity extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String email;
+    String sProgramId;
     private FirebaseFirestore db;
 
     @Override
@@ -100,7 +101,7 @@ public class ProgramActivity extends AppCompatActivity {
 
                 Map<String, Object> usersJoined = new HashMap<>();
                 usersJoined.put("email", email);
-                usersJoined.put("programID", "CA");
+                usersJoined.put("programID", sProgramId);
 
                 db.collection("usersJoined").add(usersJoined)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -134,6 +135,7 @@ public class ProgramActivity extends AppCompatActivity {
         String sProgramDescriptionTv = i.getStringExtra("description");
         String sProgramLinkTv = i.getStringExtra("link");
         String sProgramPhotoURL = i.getStringExtra("photoURL");
+        sProgramId = i.getStringExtra("id");
         Bundle bundle = i.getExtras();
 //        int sProgramPhotoIv = bundle.getInt("photo");
 

@@ -81,6 +81,7 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
         i.putExtra("type", this.programList.get(position).getType());
         i.putExtra("photo", this.programList.get(position).getPhoto());
         i.putExtra("photoURL", this.programList.get(position).getPhotoURL());
+        i.putExtra("id", this.programList.get(position).getId());
 
         v.getContext().startActivity(i);
 

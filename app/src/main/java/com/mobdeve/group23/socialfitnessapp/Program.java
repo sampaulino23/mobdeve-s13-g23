@@ -11,6 +11,7 @@ public class Program {
     private String link;
     private int photo; //not sure yet
     private String photoURL;
+    private String id;
 
     public Program(String name, String type, String description, String dateTime, String link, int photo) {
         this.name = name;
@@ -29,6 +30,7 @@ public class Program {
         this.link = getLink();
         this.photo = getPhoto();
         this.photoURL = getPhotoURL();
+        this.id = getId();
     }
 
     public String getName() {
@@ -87,4 +89,11 @@ public class Program {
         this.photoURL = photoURL;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
