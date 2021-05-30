@@ -23,6 +23,8 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,6 +67,31 @@ public class ProgramActivity extends AppCompatActivity {
 
         }
 
+        Intent i = getIntent();
+        String sProgramNameTv = i.getStringExtra("name");
+        String sProgramTypeTv = i.getStringExtra("type");
+        String sProgramDateTimeTv = i.getStringExtra("dateTime");
+        String sProgramDescriptionTv = i.getStringExtra("description");
+        String sProgramLinkTv = i.getStringExtra("link");
+        String sProgramPhotoURL = i.getStringExtra("photoURL");
+        sProgramId = i.getStringExtra("id");
+        Bundle bundle = i.getExtras();
+//        int sProgramPhotoIv = bundle.getInt("photo");
+
+        this.sProgramNameTv.setText(sProgramNameTv);
+        this.sProgramTypeTv.setText(sProgramTypeTv);
+        this.sProgramDateTimeTv.setText(sProgramDateTimeTv);
+        this.sProgramDescriptionTv.setText(sProgramDescriptionTv);
+        this.sProgramLinkTv.setText(sProgramLinkTv);
+//        this.sProgramPhotoIv.setImageResource(sProgramPhotoIv);
+
+        Glide.with(this)
+                .load(sProgramPhotoURL)
+                .placeholder(R.drawable.fitness)
+                .into(this.sProgramPhotoIv);
+
+
+
         DocumentReference docRef = db.collection("users").document("3LRBU41L2e5OJpr9vgnU");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -81,6 +108,7 @@ public class ProgramActivity extends AppCompatActivity {
                         if (admin.equals(email)) {
                             sProgramJoinBtn.setVisibility(View.GONE);
                         }
+
                         else {
                             Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getId());
                         }
@@ -92,6 +120,31 @@ public class ProgramActivity extends AppCompatActivity {
                 }
             }
         });
+
+        db.collection("usersJoined")
+                .whereEqualTo("email", email).whereEqualTo("programID", sProgramId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            Log.d("TAG", "Inside successful");
+                            System.out.println("EMAIL INSIDE USERS JOINED: " + email + sProgramId);
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                if (document.getData().get("email").equals(email) && document.getData().get("programID").equals(sProgramId)) {
+                                    System.out.println("SIZE: " + document.getData().size());
+                                    sProgramJoinBtn.setEnabled(false);
+                                }
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
 
 
 
@@ -128,27 +181,6 @@ public class ProgramActivity extends AppCompatActivity {
         });
         
 
-        Intent i = getIntent();
-        String sProgramNameTv = i.getStringExtra("name");
-        String sProgramTypeTv = i.getStringExtra("type");
-        String sProgramDateTimeTv = i.getStringExtra("dateTime");
-        String sProgramDescriptionTv = i.getStringExtra("description");
-        String sProgramLinkTv = i.getStringExtra("link");
-        String sProgramPhotoURL = i.getStringExtra("photoURL");
-        sProgramId = i.getStringExtra("id");
-        Bundle bundle = i.getExtras();
-//        int sProgramPhotoIv = bundle.getInt("photo");
 
-        this.sProgramNameTv.setText(sProgramNameTv);
-        this.sProgramTypeTv.setText(sProgramTypeTv);
-        this.sProgramDateTimeTv.setText(sProgramDateTimeTv);
-        this.sProgramDescriptionTv.setText(sProgramDescriptionTv);
-        this.sProgramLinkTv.setText(sProgramLinkTv);
-//        this.sProgramPhotoIv.setImageResource(sProgramPhotoIv);
-
-        Glide.with(this)
-                .load(sProgramPhotoURL)
-                .placeholder(R.drawable.fitness)
-                .into(this.sProgramPhotoIv);
     }
 }
