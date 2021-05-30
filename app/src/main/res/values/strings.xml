@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Social Fitness App</string>
+    <string name="facebook_app_id">2944045819204562</string>
+    <string name="fb_login_protocol_scheme">fb2944045819204562</string>
 
     <string-array name="Type_items">
         <item>Workout</item>
