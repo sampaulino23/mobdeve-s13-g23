@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,9 @@ public class ProfileActivity extends AppCompatActivity {
     private Button profileLogOutBtn;
     private BottomNavigationView bottomNavigationView;
     private RecyclerView profileRecyclerView;
+    private TextView profileNameTv;
+    private TextView profileEmailTv;
+
 
     private ArrayList<Program> programList;
 
@@ -41,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     String email;
+    String name;
     ArrayList<String> ids = new ArrayList<>();
     int i = 0;
 
@@ -52,6 +57,9 @@ public class ProfileActivity extends AppCompatActivity {
         this.profileLogOutBtn = findViewById(R.id.profileLogOutBtn);
         this.bottomNavigationView = findViewById(R.id.bottom_navigation);
         this.profileRecyclerView = findViewById(R.id.profileRecyclerView);
+        this.profileNameTv = findViewById(R.id.profileNameTv);
+        this.profileEmailTv = findViewById(R.id.profileEmailTv);
+
 
         db = FirebaseFirestore.getInstance();
 
@@ -65,6 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
                 email = profile.getEmail();
+                name = profile.getDisplayName();
+                profileEmailTv.setText(email);
+
             }
             // Name, email address, and profile photo Url
 

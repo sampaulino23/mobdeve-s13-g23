@@ -128,10 +128,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         if (admin.equals(email)) {
-                            ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
-                            params.height=1211;
+                            //ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
+                            //params.height=1211;
                             homeCreateProgramLL.setVisibility(View.VISIBLE);
-                            recyclerView.setLayoutParams(params);
+                            //recyclerView.setLayoutParams(params);
                         }
                         else {
                             Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
