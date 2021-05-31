@@ -258,7 +258,7 @@ public class SignUpActivity extends AppCompatActivity {
                             } else {
                                 signupProgressBar.setVisibility(View.INVISIBLE);
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                Toast.makeText(SignUpActivity.this, "Registration failed: Email is already registered.",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

@@ -100,6 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                 }
                 return false;
@@ -180,7 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
                 else {
-                    Toast.makeText(ProfileActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+
 //                    recyclerView.setVisibility(View.GONE);
                 }
             }
@@ -247,7 +248,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
                 else {
-                    Toast.makeText(ProfileActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+
 
 //                    recyclerView.setVisibility(View.GONE);
                 }

@@ -93,6 +93,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.home:
                         return true;

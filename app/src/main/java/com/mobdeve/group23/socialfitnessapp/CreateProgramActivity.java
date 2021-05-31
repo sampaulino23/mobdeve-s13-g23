@@ -307,7 +307,7 @@ public class CreateProgramActivity extends AppCompatActivity {
 
                         Intent i = new Intent(CreateProgramActivity.this, HomeActivity.class);
                         startActivity(i);
-                        finish();
+                        finishAffinity();
                         program.put("id", programID);
 
                         System.out.println("PROGRAM ID 2" + programID);
