@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
-        DocumentReference docRef = db.collection("users").document("TZG2PktVnkOxQcVLWZzB");
+        DocumentReference docRef = db.collection("users").document("ToP5LeUwtr1QjCY6tViS");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -270,6 +270,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this, CreateProgramActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 

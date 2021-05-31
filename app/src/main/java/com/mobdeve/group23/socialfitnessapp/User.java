@@ -14,9 +14,5 @@ public class User {
         this.birthdate = birthdate;
     }
 
-//    String fullName
-//    String email
-//    String password
-//    String confirmPassword
-//    String birthdate
+
 }
