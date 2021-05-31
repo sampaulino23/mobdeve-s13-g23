@@ -190,6 +190,9 @@ public class ProgramActivity extends AppCompatActivity {
                                     sProgramLinkLL.setVisibility(View.VISIBLE);
                                     sProgramJoinBtn.setEnabled(false);
                                     sProgramProgressBar.setVisibility(View.INVISIBLE);
+
+
+                                    loginButton.setVisibility(View.VISIBLE);
                                 }
                             }
                         } else {
