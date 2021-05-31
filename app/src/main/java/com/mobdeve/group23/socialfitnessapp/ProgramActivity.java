@@ -89,6 +89,8 @@ public class ProgramActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         loginButton.setPermissions(Arrays.asList("email, public_profile"));
+
+        // to login facebook
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -151,9 +153,6 @@ public class ProgramActivity extends AppCompatActivity {
                     if (document.exists()) {
 
                         String admin = document.getData().get("email").toString();
-                        System.out.println("ADMIN" + admin);
-                        System.out.println("EMAIL" + email);
-
 
                         if (admin.equals(email)) {
                             sProgramJoinBtn.setVisibility(View.GONE);
@@ -190,8 +189,6 @@ public class ProgramActivity extends AppCompatActivity {
                                     sProgramLinkLL.setVisibility(View.VISIBLE);
                                     sProgramJoinBtn.setEnabled(false);
                                     sProgramProgressBar.setVisibility(View.INVISIBLE);
-
-
                                     loginButton.setVisibility(View.VISIBLE);
                                 }
                             }
@@ -201,7 +198,7 @@ public class ProgramActivity extends AppCompatActivity {
                     }
                 });
 
-
+        // update DB for joined programs
         sProgramJoinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,6 +242,7 @@ public class ProgramActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
+        // to share experience in facebook
         BitmapDrawable bitmapDrawable = (BitmapDrawable) sProgramPhotoIv.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
 

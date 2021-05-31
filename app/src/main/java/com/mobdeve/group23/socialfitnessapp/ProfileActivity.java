@@ -91,6 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         bottomNavigationView.setSelectedItemId(R.id.profile);
+
+        // switching of navigation views
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -155,7 +157,7 @@ public class ProfileActivity extends AppCompatActivity {
         sample = new Program();
 
 
-
+        // to populate list of programs joined
         db.collection("usersJoined").whereEqualTo("email", email).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -166,11 +168,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     for (DocumentSnapshot d : list) {
                         String id = d.get("programID").toString();
-                        System.out.println("PROGRAM ID: " + id);
                         ids.add(0, id);
-
-                        System.out.println("ALL ID: " + ids);
-                        System.out.println("i" + i + ids.get(0));
                     }
 
                     for (int j = 0; j < ids.size(); j++) {
@@ -181,7 +179,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
                 else {
-
 //                    recyclerView.setVisibility(View.GONE);
                 }
             }
@@ -192,11 +189,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-
+    // finding of joined programs in the DB
     private void findJoinedPrograms (String id) {
 
         List<Program> mList = new ArrayList<>();  //this is my arraylist
@@ -206,8 +201,6 @@ public class ProfileActivity extends AppCompatActivity {
         Random rand = new Random();
 
         sample = new Program();
-
-
 
         db.collection("programs").whereEqualTo("id", id).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -238,18 +231,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                         programList.add(oneProgram);
 
-
-
                     }
 
                     setupRecyclerView();
-
-
                 }
 
                 else {
-
-
 //                    recyclerView.setVisibility(View.GONE);
                 }
             }
@@ -262,6 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    // to logout user session
     private void logout () {
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();

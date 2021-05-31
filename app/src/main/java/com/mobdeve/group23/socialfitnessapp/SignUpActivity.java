@@ -90,10 +90,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
     @Override
@@ -137,14 +133,13 @@ public class SignUpActivity extends AppCompatActivity {
                 } else{
                     validDate = true;
                 }
-
-
             }
         };
 
         new DatePickerDialog(SignUpActivity.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    // storing a user into the DB
     private void registerUser() {
         String fullName = signupFullNameEt.getText().toString().trim();
         String email = signupEmailEt.getText().toString().trim();
@@ -283,7 +278,5 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 
 }

@@ -187,6 +187,7 @@ public class CreateProgramActivity extends AppCompatActivity {
         new DatePickerDialog(CreateProgramActivity.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    // this function creates and stores the program in the DB
     private void createProgram() {
         String name = createNameEt.getText().toString().trim();
         String description = createDescriptionEt.getText().toString().trim();
@@ -359,6 +360,7 @@ public class CreateProgramActivity extends AppCompatActivity {
         }
     }
 
+    // function for uploading program photo
     private void uploadPhoto() {
 
         final ProgressDialog pd = new ProgressDialog(this);

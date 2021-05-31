@@ -83,6 +83,7 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.home);
 
+        // switching of navigation views
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -150,6 +151,7 @@ public class HomeActivity extends AppCompatActivity {
 
         this.homeSortSp.setAdapter(dataAdapter);
 
+        // sorting of programs
         this.homeSortSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -251,7 +253,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this, CreateProgramActivity.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -326,6 +327,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    // filtering of programs
     private Query filterQuery(boolean workout, boolean nutrition, boolean seminar, boolean others, int dateSort) {
         Query filter = db.collection("programs").orderBy("programDate", Query.Direction.ASCENDING);
 

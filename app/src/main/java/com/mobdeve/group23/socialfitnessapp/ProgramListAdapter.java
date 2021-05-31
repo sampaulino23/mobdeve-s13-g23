@@ -52,9 +52,6 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
             }
         });
 
-
-
-
     }
 
     @Override
