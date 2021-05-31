@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView loginSignUpTv;
     private Button loginLogInBtn;
-    private Button loginFacebookBtn;
     private EditText loginEmailEt;
     private EditText loginPasswordEt;
     private ProgressBar loginProgressBar;
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         this.loginSignUpTv = findViewById(R.id.loginSignUpTv);
         this.loginLogInBtn = findViewById(R.id.loginLogInBtn);
-        this.loginFacebookBtn = findViewById(R.id.loginFacebookBtn);
         this.loginEmailEt = findViewById(R.id.loginEmailEt);
         this.loginPasswordEt = findViewById(R.id.loginPasswordEt);
         this.loginProgressBar = findViewById(R.id.loginProgressBar);
@@ -61,13 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
-
-        this.loginFacebookBtn.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        }));
 
 
     }

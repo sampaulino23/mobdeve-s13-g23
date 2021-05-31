@@ -40,7 +40,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText signupConfirmPasswordEt;
     private EditText signupBirthdateEt;
     private Button signupSignUpBtn;
-    private Button signupFacebookBtn;
     private TextView signupSignInTv;
     private ProgressBar signupProgressBar;
 
@@ -64,7 +63,6 @@ public class SignUpActivity extends AppCompatActivity {
         this.signupConfirmPasswordEt = findViewById(R.id.signupConfirmPasswordEt);
         this.signupBirthdateEt = findViewById(R.id.signupBirthdateEt);
         this.signupSignUpBtn = findViewById(R.id.signupSignUpBtn);
-        this.signupFacebookBtn = findViewById(R.id.signupFacebookBtn);
         this.signupSignInTv = findViewById(R.id.signupSignInTv);
         this.signupProgressBar = findViewById(R.id.signupProgressBar);
 
@@ -80,15 +78,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
-            }
-        });
-
-        this.signupFacebookBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(SignUpActivity.this, CreateProgramActivity.class);
-                startActivity(i);
-                finish();
             }
         });
 

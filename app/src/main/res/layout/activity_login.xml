@@ -66,13 +66,6 @@
         android:text="Login"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/loginFacebookBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Connect with Facebook"
-        android:textAllCaps="false" />
-
     <ProgressBar
         android:id="@+id/loginProgressBar"
         style="?android:attr/progressBarStyle"

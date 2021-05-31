@@ -97,13 +97,6 @@
         android:text="Sign Up"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/signupFacebookBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Connect with Facebook"
-        android:textAllCaps="false" />
-
     <ProgressBar
         android:id="@+id/signupProgressBar"
         style="?android:attr/progressBarStyle"
