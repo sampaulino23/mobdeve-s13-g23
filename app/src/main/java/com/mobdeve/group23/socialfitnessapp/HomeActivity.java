@@ -43,9 +43,6 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String email;
 
-//    private static final int[] pics = {R.drawable.chicken_sq, R.drawable.cow_sq,
-//            R.drawable.goat_sq, R.drawable.pig_sq};
-
     private ArrayList<Program> programList;
     private ArrayList<Program> temp;
     private RecyclerView recyclerView;
@@ -125,11 +122,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         if (admin.equals(email)) {
-
-                            //ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
-                            //params.height=1211;
                             homeCreateProgramLL.setVisibility(View.VISIBLE);
-                            //recyclerView.setLayoutParams(params);
                         }
                         else {
                             Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
@@ -143,16 +136,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-        System.out.println(workoutFilter);
-
-//        populateList();
-//        setupRecyclerView();
-
         ArrayList<String> sortOptions = new ArrayList<>();
         sortOptions.add(0, "Date added ▼");
         sortOptions.add("Date added ▲");
@@ -160,8 +143,6 @@ public class HomeActivity extends AppCompatActivity {
         sortOptions.add("Date of program ▲");
 
 
-
-        
         ArrayAdapter<Object> dataAdapter;
         dataAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, sortOptions);
 
@@ -293,17 +274,12 @@ public class HomeActivity extends AppCompatActivity {
 
         programList = new ArrayList<>();
         temp = new ArrayList<>();
-        Program sample = new Program();
-        Random rand = new Random();
-
-        sample = new Program();
 
         filterQuery(workoutFilter, nutritionFilter, seminarFilter, othersFilter, dateSort).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
                 if (!queryDocumentSnapshots.isEmpty()) {
-//                    recyclerView.setVisibility(View.VISIBLE);
                     List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
 
                     for (DocumentSnapshot d : list) {
@@ -334,7 +310,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 else {
-                    Toast.makeText(HomeActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+             //    Toast.makeText(HomeActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
 
 //                    recyclerView.setVisibility(View.GONE);
                 }
@@ -347,49 +323,6 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-        /*
-        sample.setName("Lorem ipsum dolor sit amet");
-        sample.setDescription("In in libero in mauris cursus iaculis nec nec nibh. Vestibulum imperdiet elit et est tristique, id iaculis urna accumsan. Proin nisi arcu, vehicula eu metus vitae, cursus blandit elit. Proin sodales, eros et finibus posuere, lorem enim pretium augue, sit amet aliquam est quam ac sapien. Mauris pretium augue quis elit ultrices aliquet.In in libero in mauris cursus iaculis nec nec nibh. Vestibulum imperdiet elit et est tristique, id iaculis urna accumsan. Proin nisi arcu, vehicula eu metus vitae, cursus blandit elit. Proin sodales, eros et finibus posuere, lorem enIn in libero in mauris cursus iaculis nec nec nibh. Vestibulum imperdiet elit et est tristique, id iaculis urna accumsan. Proin nisi arcu, vehicula eu metus vitae, cursus blandit elit. Proin sodales, eros et finibus posuere, lorem en");
-        sample.setType("Workout");
-        sample.setDate("Sunday, December 30, 2021");
-        sample.setTime("06:00 PM");
-        sample.setLink("https://zoom.us/j/92604239679?pwd=R3RZUXNweVV3U0pMbFFtbng4Nmsydz09");
-        sample.setPhoto(pics[rand.nextInt(pics.length)]);
-        programList.add(0, sample);
-
-        sample = new Program();
-        sample.setName("Nulla ut tortor sollicitudin");
-        sample.setDescription("In in libero in mauris cursus iaculis nec nec nibh. Vestibulum imperdiet elit et est tristique, id iaculis urna accumsan. Proin nisi arcu, vehicula eu metus vitae, cursus blandit elit. Proin sodales, eros et finibus posuere, lorem enim pretium augue, sit amet aliquam est quam ac sapien. Mauris pretium augue quis elit ultrices aliquet.");
-        sample.setType("Seminar");
-        sample.setDate("Friday, August 07, 2021");
-        sample.setTime("12:00 PM");
-        sample.setLink("https://zoom.us/j/92604239679?pwd=R3RZUXNweVV3U0pMbFFtbng4Nmsydz09");
-        sample.setPhoto(pics[rand.nextInt(pics.length)]);
-        programList.add(0, sample);
-
-        sample = new Program();
-        sample.setName("Ut condimentum malesuada lobortis");
-        sample.setDescription("In in libero in mauris cursus iaculis nec nec nibh. Vestibulum imperdiet elit et est tristique, id iaculis urna accumsan. Proin nisi arcu, vehicula eu metus vitae, cursus blandit elit. Proin sodales, eros et finibus posuere, lorem enim pretium augue, sit amet aliquam est quam ac sapien. Mauris pretium augue quis elit ultrices aliquet.");
-        sample.setType("Nutrition");
-        sample.setDate("Tuesday, June 21, 2022");
-        sample.setTime("08:00 AM");
-        sample.setLink("https://zoom.us/j/92604239679?pwd=R3RZUXNweVV3U0pMbFFtbng4Nmsydz09");
-        sample.setPhoto(pics[rand.nextInt(pics.length)]);
-        programList.add(0, sample);
-
-        sample = new Program();
-        sample.setName("Vestibulum sit amet ante a orci lacinia");
-        sample.setDescription("In in libero in mauris cursus iaculis nec nec nibh. Vestibulum imperdiet elit et est tristique, id iaculis urna accumsan. Proin nisi arcu, vehicula eu metus vitae, cursus blandit elit. Proin sodales, eros et finibus posuere, lorem enim pretium augue, sit amet aliquam est quam ac sapien. Mauris pretium augue quis elit ultrices aliquet.");
-        sample.setType("Workout");
-        sample.setDate("Monday, February 09, 2021");
-        sample.setTime("04:30 PM");
-        sample.setLink("https://zoom.us/j/92604239679?pwd=R3RZUXNweVV3U0pMbFFtbng4Nmsydz09");
-        sample.setPhoto(pics[rand.nextInt(pics.length)]);
-        programList.add(0, sample);
-*/
 
     }
 

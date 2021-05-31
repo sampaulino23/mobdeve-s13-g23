@@ -62,7 +62,6 @@ public class CreateProgramActivity extends AppCompatActivity {
     private RadioButton createNutritionRBtn;
     private RadioButton createSeminarRBtn;
     private RadioButton createOthersRBtn;
-//    private Spinner createTypeSp;
     private EditText createDateTimeEt;
     private EditText createLinkEt;
     private TextView createFilenameTv;
@@ -85,7 +84,6 @@ public class CreateProgramActivity extends AppCompatActivity {
 
 
     String photoURL;
-    String programID;
 
 
     @Override
@@ -103,7 +101,6 @@ public class CreateProgramActivity extends AppCompatActivity {
         this.createNameEt = findViewById(R.id.createNameEt);
         this.createDescriptionEt = findViewById(R.id.createDescriptionEt);
         this.createTypeRGrp = findViewById(R.id.createTypeRGrp);
-//        this.createTypeSp = findViewById(R.id.createTypeSp);
         this.createWorkoutRBtn = findViewById(R.id.createWorkoutRBtn);
         this.createNutritionRBtn = findViewById(R.id.createNutritionRBtn);
         this.createSeminarRBtn = findViewById(R.id.createSeminarRBtn);
@@ -271,7 +268,6 @@ public class CreateProgramActivity extends AppCompatActivity {
         int radioId = createTypeRGrp.getCheckedRadioButtonId();
         createTypeRBtn = findViewById(radioId);
         String type = createTypeRBtn.getText().toString();
-//        String type = createTypeSp.getSelectedItem().toString().trim();
         String dateTime = createDateTimeEt.getText().toString().trim();
         String link = createLinkEt.getText().toString().trim();
         String filename = photoURL;

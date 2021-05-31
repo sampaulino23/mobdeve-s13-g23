@@ -131,22 +131,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Date current = calendar.getTime();
                 int diff1 =new Date().compareTo(current);
 
-// for age
-//                int yearSelected = calendar.get(Calendar.YEAR);
-
-//                age = yearNow - yearSelected;
-//
-//                if(age < 18){
-//                    validDate = false;
-//                    System.out.println(age);
-//                    System.out.println(validDate);
-//                    return;
-//                } else if (age >= 18){
-//                    validDate = true;
-//                    System.out.println(age);
-//                    System.out.println(validDate);
-//                }
-
                 if(diff1 < 0){
                     validDate = false;
                     return;

@@ -44,16 +44,6 @@ public class ProgramListAdapter extends RecyclerView.Adapter<ProgramListHolder> 
                 .placeholder(R.drawable.fitness)
                 .into(holder.programPhotoIv);
 
-        //start new activity
-        /*
-        holder.itemView.findViewById(R.id.orderlistViewTv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setIntent(v, position);
-            }
-        });
-
-         */
 
         holder.itemView.findViewById(R.id.programLl).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,7 +9,7 @@ public class Program {
     private String description;
     private String dateTime;
     private String link;
-    private int photo; //not sure yet
+    private int photo;
     private String photoURL;
     private String id;
 

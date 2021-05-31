@@ -245,16 +245,6 @@ public class ProgramActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
-//        ShareLinkContent shareLinkContent = new ShareLinkContent.Builder()
-//                .setContentUrl(Uri.parse("https://youtu.be/GxrxV37a9YE"))
-//                .setShareHashtag(new ShareHashtag.Builder()
-//                    .setHashtag("#MOBDEVE").build())
-//                .setQuote(sProgramDescriptionTv.getText().toString())
-//
-//                .build();
-//
-//        sbLink.setShareContent(shareLinkContent);
-
         BitmapDrawable bitmapDrawable = (BitmapDrawable) sProgramPhotoIv.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
 
@@ -269,26 +259,6 @@ public class ProgramActivity extends AppCompatActivity {
                 .build();
 
         sbPhoto.setShareContent(sharePhotoContent);
-
-
-//        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-//            @Override
-//            public void onCompleted(JSONObject object, GraphResponse response) {
-//                Log.d("Tag", object.toString());
-//                try {
-//                    String name = object.getString("name");
-//                    String email = object.getString("email");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        Bundle bundle = new Bundle();
-//        bundle.putString("fields", "email, name");
-//
-//        graphRequest.setParameters(bundle);
-//        graphRequest.executeAsync();
     }
 
     AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
