@@ -1,10 +1,5 @@
 package com.mobdeve.group23.socialfitnessapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,12 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -45,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     String email;
-    String name;
+    String fullName;
     ArrayList<String> ids = new ArrayList<>();
     int i = 0;
 
@@ -73,7 +71,8 @@ public class ProfileActivity extends AppCompatActivity {
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
                 email = profile.getEmail();
-                name = profile.getDisplayName();
+                fullName = profile.getDisplayName();
+                profileNameTv.setText(fullName);
                 profileEmailTv.setText(email);
 
             }
@@ -100,10 +99,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         populateProgramsJoined();
-
-
-
-
 
     }
 
@@ -141,13 +136,6 @@ public class ProfileActivity extends AppCompatActivity {
                         findJoinedPrograms(ids.get(j));
 
                     }
-
-
-
-
-
-
-
 
                 }
 
@@ -235,7 +223,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void logout () {
         FirebaseAuth.getInstance().signOut();
-
+        LoginManager.getInstance().logOut();
         startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
         finish();
     }

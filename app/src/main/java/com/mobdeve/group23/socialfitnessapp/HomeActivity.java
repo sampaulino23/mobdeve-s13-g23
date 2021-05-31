@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
-        DocumentReference docRef = db.collection("users").document("3LRBU41L2e5OJpr9vgnU");
+        DocumentReference docRef = db.collection("users").document("TZG2PktVnkOxQcVLWZzB");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

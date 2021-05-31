@@ -88,38 +88,70 @@
                     android:textColor="#000000"
                     android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/sProgramLinkLabelTv"
+                <LinearLayout
+                    android:id="@+id/sProgramLinkLL"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Meeting Link"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/sProgramLinkTv"
+                    <TextView
+                        android:id="@+id/sProgramLinkLabelTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Meeting Link"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sProgramLinkTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoLink="all"
+                        android:linksClickable="true"
+                        android:text="https://zoom.us/j/5551112222"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/sProgramProgressBar"
+                    style="?android:attr/progressBarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autoLink="all"
-                    android:linksClickable="true"
-                    android:text="https://zoom.us/j/5551112222"
-                    android:textSize="16dp" />
+                    tools:visibility="invisible" />
 
                 <Button
                     android:id="@+id/sProgramJoinBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:text="Join Program"
                     android:textAllCaps="false" />
 
+                <com.facebook.share.widget.ShareButton
+                    android:id="@+id/sb_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="Share Experience"
+                    android:visibility="gone" />
+
+                <com.facebook.share.widget.ShareButton
+                    android:id="@+id/sb_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Share Link"
+                    android:visibility="gone" />
 
                 <com.facebook.login.widget.LoginButton
                     android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    app:com_facebook_login_text="Continue with Facebook to Share" />
 
             </LinearLayout>
 

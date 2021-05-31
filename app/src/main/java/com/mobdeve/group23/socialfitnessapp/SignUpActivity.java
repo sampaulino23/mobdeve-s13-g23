@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -260,11 +261,13 @@ public class SignUpActivity extends AppCompatActivity {
                                 storeUser();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 signupProgressBar.setVisibility(View.INVISIBLE);
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(fullName).build();
+                                user.updateProfile(profileUpdates);
                                 Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
                                 startActivity(i);
                                 finish();
                             } else {
-                                signupProgressBar.setVisibility(View.GONE);
+                                signupProgressBar.setVisibility(View.INVISIBLE);
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
