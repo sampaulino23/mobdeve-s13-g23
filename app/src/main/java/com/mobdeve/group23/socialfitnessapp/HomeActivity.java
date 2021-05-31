@@ -93,7 +93,6 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
-                        finish();
                         return true;
                     case R.id.home:
                         return true;
@@ -270,7 +269,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this, CreateProgramActivity.class);
                 startActivity(i);
-                finish();
             }
         });
 

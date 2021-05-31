@@ -92,6 +92,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/profileLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_with_shadow"
@@ -102,7 +103,7 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/profileProgramsJoined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Programs Joined "

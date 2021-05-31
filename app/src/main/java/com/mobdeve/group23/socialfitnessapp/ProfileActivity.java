@@ -2,9 +2,11 @@ package com.mobdeve.group23.socialfitnessapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,12 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,6 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView profileRecyclerView;
     private TextView profileNameTv;
     private TextView profileEmailTv;
+    private TextView profileProgramsJoined;
+    private LinearLayout profileLinearLayout;
 
 
     private ArrayList<Program> programList;
@@ -57,6 +64,8 @@ public class ProfileActivity extends AppCompatActivity {
         this.profileRecyclerView = findViewById(R.id.profileRecyclerView);
         this.profileNameTv = findViewById(R.id.profileNameTv);
         this.profileEmailTv = findViewById(R.id.profileEmailTv);
+        this.profileProgramsJoined = findViewById(R.id.profileProgramsJoined);
+        this.profileLinearLayout = findViewById(R.id.profileLinearLayout);
 
 
         db = FirebaseFirestore.getInstance();
@@ -91,10 +100,41 @@ public class ProfileActivity extends AppCompatActivity {
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
-                        finish();
                         return true;
                 }
                 return false;
+            }
+        });
+
+        DocumentReference docRef = db.collection("users").document("TZG2PktVnkOxQcVLWZzB");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        String admin = document.getData().get("email").toString();
+                        System.out.println("ADMIN" + admin);
+                        System.out.println("EMAIL" + email);
+
+
+                        if (admin.equals(email)) {
+
+                            //ViewGroup.LayoutParams params=recyclerView.getLayoutParams();
+                            //params.height=1211;
+                            profileLinearLayout.setVisibility(View.GONE);
+                            //recyclerView.setLayoutParams(params);
+                        }
+                        else {
+                            Log.d("TAG", "DocumentSnapshot data NOT ADMIN: " + document.getData().get("email"));
+                        }
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
             }
         });
 
